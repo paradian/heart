@@ -3916,7 +3916,7 @@ scope.set_logger = function (logger) {
             ctx.moveTo(0, 0)
             ctx.scale(0.75, 0.75)
             ctx.font = '12px 微软雅黑,Verdana' // 字号肿么没有用? (ˉ(∞)ˉ)
-            ctx.fillText('click here', 23, 16)
+            ctx.fillText('点这个小心心', 23, 16)
             ctx.restore()
           },
           clear: function () {
@@ -4447,6 +4447,8 @@ scope.set_logger = function (logger) {
           <div id="code">
             <span class="say">我跟你讲</span><br />
             <span class="say">我超级厉害</span><br />
+            <span class="say">我超级厉害</span><br />
+            <span class="say">我超级厉害</span><br />
             <span class="say">喏</span><br />
             <span class="say">给你看个好玩的</span><br />
 
@@ -4462,13 +4464,31 @@ scope.set_logger = function (logger) {
         </div>
         <canvas id="canvas" width="1100" height="680"></canvas>
       </div>
-      <audio
-        src="http://img02.tuke88.com/newpreview_music/09/01/38/5c89e10412f8424475.mp3"
-        autoplay="autoplay"
-      ></audio>
+      <audio autoplay="autoplay" id="vd">
+        <source
+          src="http://img02.tuke88.com/newpreview_music/09/01/38/5c89e10412f8424475.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
     </div>
 
-    <script></script>
+    <script>
+      function audioPlayer() {
+        var music = document.getElementById('vd') //获取ID
+        console.log(music)
+        console.log(music.paused)
+        if (music.paused) {
+          //判读是否播放
+          music.paused = false
+          music.play() //没有就播放
+        } else {
+          // music.pause()
+        }
+      }
+      window.addEventListener('click', () => {
+        audioPlayer()
+      })
+    </script>
 
     <script>
       ;(function () {
@@ -4569,6 +4589,7 @@ scope.set_logger = function (logger) {
         var seed = tree.seed
         var foot = tree.footer
         var hold = 1
+
         canvas
           .click(function (e) {
             var offset = canvas.offset(),
@@ -4576,6 +4597,7 @@ scope.set_logger = function (logger) {
               y
             x = e.pageX - offset.left
             y = e.pageY - offset.top
+
             if (seed.hover(x, y)) {
               hold = 0
               canvas.unbind('click')
